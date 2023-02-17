@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /**
-  *main - entry point
-  *Return: Always 0 (success)
+ *main - Entry point
+ *Return: Always 0 (Success)
  **/
 
 int main(void)
@@ -13,11 +14,7 @@ int main(void)
 	{
 		putchar(x);
 	}
-	for (x = 'A'; x <= 'Z'; x++)
-	{
-		putchar(x);
-	}
 	putchar('\n');
+
 	return (0);
 }
-
