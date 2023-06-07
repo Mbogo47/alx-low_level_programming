@@ -15,7 +15,6 @@ void _puts_recursion(char*s)
                 return;
         }
                 putchar(*s);
-                /*Recursive call to print rest of the string*/
-                _puts_recursion(s + 1);
+                /*Recursive call to print rest of the string*/                                                _puts_recursion(s + 1);
 }
 
