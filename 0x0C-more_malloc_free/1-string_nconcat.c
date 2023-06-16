@@ -2,41 +2,48 @@
 #include <string.h>
 #include "main.h"
 
-/**
-  *string_nconcat - concatenates two strings
-  *@s1 : first string
-  *@s2 : second string
-  *@n : number of characters in string 2 we want to concatenate
-  *Return: Pointer to newly allocated space in memory containing the new string
-  */
 
+/**
+ * string_nconcat - a function that concatenates two strings.
+ *
+ * @s1: first char
+ * @s2: secound char
+ * @n: unsigned int
+ *
+ * Return: If the function fails, it should return NULL
+ */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	int scount1, scount2, scount3, i;
-	char *a;
+	unsigned int x, y, z;
+	char *s;
 
 	if (s1 == NULL)
-		s1 = "";
-
+	{
+		x = 0;
+	}
+	else
+	{
+		for (x = 0; s1[x]; ++x)
+		;
+	}
 	if (s2 == NULL)
-		s2 = "";
-
-	scount1 = strlen(s1);
-	scount2 = strlen(s2);
-	scount3 = scount1 + scount2 + 1;
-	i = 0;
-
-	a = malloc(sizeof(char) * scount3);
-	for (i = 0; i < scount1; i++)
 	{
-		a[i] = s1[i];
+		y = 0;
 	}
-	for (i = 0; i <= n ; i++)
+	else
 	{
-		a[i + scount1] = s2[i];
+		for (y = 0; s2[y]; ++y)
+		;
 	}
-
-	a[scount3 - 1] = '\0';
-
-	return (a);
+	if (y > n)
+		y = n;
+	s = malloc(sizeof(char) * (x + y + 1));
+	if (s == NULL)
+		return (NULL);
+	for (z = 0; z < x; z++)
+		s[z] = s1[z];
+	for (z = 0; z < y; z++)
+		s[z + x] = s2[z];
+	s[x + y] = '\0';
+	return (s);
 }
