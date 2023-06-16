@@ -1,32 +1,30 @@
 #include <stdlib.h>
-#include <stdio.h>
-#include "holberton.h"
+#include "main.h"
+
 /**
- * array_range - get len, malloc * len
- * loop size of len to insert min++ into new arr
- * @min: min input
- * @max: max input
- * Return: pointer to new arr of ints
+ * *array_range - creates an array of integers
+ * @min: minimum range of values stored
+ * @max: maximum range of values stored and number of elements
+ *
+ * Return: pointer to the new array
  */
 int *array_range(int min, int max)
 {
-	int *arr;
-	int i, len;
+	int *ptr;
+	int i, size;
 
 	if (min > max)
 		return (NULL);
 
-	for (len = 0; len < (max - min); len++)
-		;
+	size = max - min + 1;
 
-	arr = malloc(sizeof(int) * (len + 1));
-	if (arr == NULL)
+	ptr = malloc(sizeof(int) * size);
+
+	if (ptr == NULL)
 		return (NULL);
 
-	for (i = 0; i <= len; i++)
-	{
-		arr[i] = min++;
-	}
+	for (i = 0; min <= max; i++)
+		ptr[i] = min++;
 
-	return (arr);
+	return (ptr);
 }
