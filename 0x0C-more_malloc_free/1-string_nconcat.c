@@ -1,42 +1,37 @@
-#include <stdlib.h>
-#include <string.h>
 #include "main.h"
-
-/**
-  *string_nconcat - concatenates two strings
-  *@s1 : first string
-  *@s2 : second string
-  *@n : number of characters in string 2 we want to concatenate
-  *Return: Pointer to newly allocated space in memory containing the new string
-  */
+#include <stdio.h>
+#include <stdlib.h>
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	int scount1, scount2, scount3, i;
-	char *a;
+    char *new_str;
+    unsigned int i, j, len1, len2;
 
-	if (s1 == NULL)
-		s1 = "";
+    if (s1 == NULL)
+        s1 = "";
+    if (s2 == NULL)
+        s2 = "";
 
-	if (s2 == NULL)
-		s2 = "";
+    for (len1 = 0; s1[len1]; len1++) /* Find length of s1 */
+        ;
+    for (len2 = 0; s2[len2]; len2++) /* Find length of s2 */
+        ;
 
-	scount1 = strlen(s1);
-	scount2 = strlen(s2);
-	scount3 = scount1 + scount2 + 1;
-	i = 0;
+    /* If n is greater or equal to the length of s2 then use the entire string s2 */
+    if (n >= len2)
+        n = len2;
 
-	a = malloc(sizeof(char) * scount3);
-	for (i = 0; i < scount1; i++)
-	{
-		a[i] = s1[i];
-	}
-	for (i = 0; i <= n ; i++)
-	{
-		a[i + scount1] = s2[i];
-	}
+    new_str = malloc((len1 + n + 1) * sizeof(char)); /* +1 for the null-terminator */
 
-	a[scount3 - 1] = '\0';
+    if (new_str == NULL) /* If malloc fails */
+        return (NULL);
 
-	return (a);
+    for (i = 0; i < len1; i++)
+        new_str[i] = s1[i];
+    for (j = 0; j < n; j++, i++)
+        new_str[i] = s2[j];
+
+    new_str[i] = '\0'; /* Null-terminate the new string */
+
+    return (new_str);
 }
