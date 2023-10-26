@@ -2,51 +2,50 @@
 #include <stdlib.h>
 
 /**
- * argstostr - concatenates all the arguments of a program
- * @ac: argument count
- * @av: argument vector
+ * argstostr - Concatenates all the arguments of a program
+ * @ac: Argument count
+ * @av: Argument vector
  *
- * Return: pointer of an array of char
+ * Return: Pointer to an array of characters
  */
 char *argstostr(int ac, char **av)
 {
-	char *aout;
-	int c, i, j, ia;
+	char *concatenated;
+	int total_length = 0, i, j, index = 0;
 
-	if (ac == 0)
+	if (ac == 0 || av == NULL)
 		return (NULL);
 
-	for (c = i = 0; i < ac; i++)
+	for (i = 0; i < ac; i++)
 	{
 		if (av[i] == NULL)
 			return (NULL);
 
 		for (j = 0; av[i][j] != '\0'; j++)
-			c++;
-		c++;
+			total_length++;
+		total_length++;
 	}
 
-	aout = malloc((c + 1) * sizeof(char));
+	concatenated = malloc((total_length + 1) * sizeof(char));
 
-	if (aout == NULL)
+	if (concatenated == NULL)
 	{
-		free(aout);
+		free(concatenated);
 		return (NULL);
 	}
 
-	for (i = j = ia = 0; ia < c; j++, ia++)
+	for (i = 0; i < ac; i++)
 	{
-		if (av[i][j] == '\0')
+		for (j = 0; av[i][j] != '\0'; j++)
 		{
-			aout[ia] = '\n';
-			i++;
-			ia++;
-			j = 0;
+			concatenated[index] = av[i][j];
+			index++;
 		}
-		if (ia < c - 1)
-			aout[ia] = av[i][j];
+		concatenated[index] = '\n';
+		index++;
 	}
-	aout[ia] = '\0';
+	concatenated[index] = '\0';
 
-	return (aout);
+	return (concatenated);
 }
+
